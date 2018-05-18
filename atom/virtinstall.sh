@@ -40,20 +40,20 @@ fi
 cd ${VMNAME}
 
 cp /var/lib/libvirt/images/centos73x86_64.qcow2 system.qcow2
-
+#disk size
 if [ "${DSIZE}" -le 40 ];then
 
-    echo "The vm disk less 100GB do not resize"
+    echo "The vm disk less 40GB do not resize"
 else
 	resizenum=$(expr $DSIZE - 40)G
     qemu-img resize system.qcow2 +${resizenum}
 fi	
 
-#disk size
+#create vm
 
-virt-install --name ${VMNAME}.inspurcloud.com --disk path=/var/lib/libvirt/images/${VMNAME}/system.qcow2,bus=virtio,cache=none --network bridge:br_mgm,model=virtio --ram ${MEM}  --vcpus ${VCPU} --accelerate --boot hd --vnc -vnclisten 0.0.0.0 --noreboot --autostart --import 
+virt-install --name ${VMNAME}.inspurcloudtest.com --disk path=/var/lib/libvirt/images/${VMNAME}/system.qcow2,bus=virtio,cache=none --network bridge:br_mgm,model=virtio --ram ${MEM}  --vcpus ${VCPU} --accelerate --boot hd --vnc -vnclisten 0.0.0.0 --noreboot --autostart --import 
 
 #virsh list
 
-virsh start ${VMNAME}.inspurcloud.com
+virsh start ${VMNAME}.inspurcloudtest.com
 virsh list
