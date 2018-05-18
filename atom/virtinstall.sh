@@ -23,11 +23,14 @@ VMNAME=$1
 VCPU=$2
 MEM=$(expr $3 \* 1024)
 DSIZE=$4
-#virt-install \
-#    --name rhel5.8
-#    --ram 512
-#    --disk /VMs/rhel5.8.img
-#    --import
+
+#Determine if the virtual machine exists
+echo "Determine if the virtual machine exists"
+virsh list --all|awk  '{print$2}'|sed '1,2d'|grep -E "^${VMNAME}"
+if [ $? -eq 0 ];then
+    echo "The ${VMNAME} already exists"
+    exit 1
+fi
 
 cd ${WORKDIR}
 if [ -d  "${VMNAME}" ];then
@@ -39,7 +42,7 @@ fi
 
 cd ${VMNAME}
 
-cp /var/lib/libvirt/images/centos73x86_64.qcow2 system.qcow2
+cp /home/ubuntu/centos72x86_64_cloud-init.qcow2 system.qcow2
 
 if [ "${DSIZE}" -le 40 ];then
 
@@ -51,9 +54,7 @@ fi
 
 #disk size
 
-virt-install --name ${VMNAME}.inspurcloud.com --disk path=/var/lib/libvirt/images/${VMNAME}/system.qcow2,bus=virtio,cache=none --network bridge:br_mgm,model=virtio --ram ${MEM}  --vcpus ${VCPU} --accelerate --boot hd --vnc -vnclisten 0.0.0.0 --noreboot --autostart --import 
-
-#virsh list
-
+virt-install --name ${VMNAME}.inspurcloud.com --disk path=/var/lib/libvirt/images/${VMNAME}/system.qcow2,bus=virtio,cache=none --network bridge:br_mgm,model=virtio --ram ${MEM}  --vcpus ${VCPU} --accelerate --boot hd --vnc --vnclisten 0.0.0.0 --noreboot --autostart --import 
 virsh start ${VMNAME}.inspurcloud.com
+#virsh list
 virsh list
