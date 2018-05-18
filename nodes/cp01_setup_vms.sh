@@ -2,9 +2,14 @@
 
 set -ex
 
-echo "Setup vms on cp01 node..."
+echo "Welcome to setup vms on cp01 node!"
 
-# Install kvm/libvirt packages
+base_path=$(cd `dirname $0`; pwd)
+atom_path=$base_path/../
 
+echo "===>>> Prepare env..."
+sh $atom_path/prepare_env.sh
 
-
+echo "===>>> Setup vms..."
+echo "======vms: nginx01"
+sh $atom_path/virtinstall.sh nginx01
