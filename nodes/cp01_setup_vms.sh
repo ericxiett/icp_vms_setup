@@ -12,4 +12,4 @@ sh $atom_path/prepare_env.sh
 
 echo "===>>> Setup vms..."
 echo "======vms: nginx01"
-sh $atom_path/virtinstall.sh nginx01
+sh $atom_path/virtinstall.sh nginx01 8 16 200
