@@ -17,9 +17,17 @@ else
     apt-get install virtinst -y
 fi
 #Determine libguestfs-tools tools install
-dpkg -l|grep -E "libguestfs-tools"|awk '{print$2}'|grep -E "^libguestfs-tools"
+#dpkg -l|grep -E "libguestfs-tools"|awk '{print$2}'|grep -E "^libguestfs-tools"
+#if [ $? -eq 0 ];then
+#	echo "The libguestfs-tools  already installed"
+#else
+#   apt-get install libguestfs-tools -y
+#fi
+
+#Determine genisoimage tools install 
+dpkg -l|grep -E "genisoimage"|awk '{print$2}'|grep -E "^genisoimage"
 if [ $? -eq 0 ];then
-	echo "The libguestfs-tools  already installed"
+	echo "The genisoimage tools already installed"
 else
-    apt-get install libguestfs-tools -y
+    apt-get install genisoimage -y
 fi
