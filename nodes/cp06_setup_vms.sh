@@ -5,7 +5,7 @@ set -ex
 echo "Welcome to setup vms on cp06 node!"
 
 base_path=$(cd `dirname $0`; pwd)
-atom_path=$base_path/../
+atom_path=$base_path/../atom
 
 echo "===>>> Prepare env..."
 sh $atom_path/prepare_env.sh

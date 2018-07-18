@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#create data dir
+pvcreate /dev/sdb
+vgcreate vg-icpvms /dev/sdb
+lvcreate -L 10T -n lv-icpvms vg-icpvms
+mkfs.ext4 /dev/mapper/vg--icpvms-lv--icpvms
+
+echo "/dev/mapper/vg--icpvms-lv--icpvms /var/lib/libvirt/images ext4 defaults 0 0" >>/etc/fstab
+mount -a
+#
+apt-get install -y qemu-kvm libvirt-bin vlan ifenslave  bridge-utils qemu-utils
 
 #Determine qemu-utils tools install
 dpkg -l|grep -E "qemu-utils|virtinst"|awk '{print$2}'|grep -E "^qemu-utils|^virtinst"
@@ -31,3 +41,5 @@ if [ $? -eq 0 ];then
 else
     apt-get install genisoimage -y
 fi
+
+

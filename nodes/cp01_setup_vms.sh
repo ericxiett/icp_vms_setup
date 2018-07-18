@@ -5,7 +5,7 @@ set -ex
 echo "Welcome to setup vms on cp01 node!"
 
 base_path=$(cd `dirname $0`; pwd)
-atom_path=$base_path/../
+atom_path=$base_path/../atom
 
 echo "===>>> Prepare env..."
 sh $atom_path/prepare_env.sh
@@ -19,4 +19,5 @@ echo "======vms: frontend01"
 sh  $atom_path/virtinstall.sh  frontend01 4 8 200 10.2.7.25 255.255.252.0 10.2.7.254
 echo "======vms: redis01"
 sh  $atom_path/virtinstall.sh  redis01 2 8 200 10.2.7.28 255.255.252.0 10.2.7.254
+
 

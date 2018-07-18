@@ -12,7 +12,7 @@ if [ $# -lt 1 ]
    fi
 
 VMNAME=${1}
-SUFFIX=".inspurcloudtest.com"
+SUFFIX=".inspurcloud.com"
 VMDIR="/var/lib/libvirt/images/"
 
 result=$(virsh list --all|awk  '{print$2" "$3}'|sed '1,2d'|grep -E "^${VMNAME}")

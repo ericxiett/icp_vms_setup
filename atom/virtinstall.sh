@@ -24,6 +24,7 @@ DSIZE=$4
 IPADDR=$5
 NET_MASK=$6
 NET_GATEWAY=$7
+DOMAIN="inspurcloud"
 
 get_netdes()
 {
@@ -111,16 +112,16 @@ genisoimage  -output seed.iso -volid cidata -joliet -rock user-data meta-data ne
 
 #create vm
 echo "beginning create vm......"   
-virt-install --name ${VMNAME}.inspurcloudtest.com --disk path=/var/lib/libvirt/images/${VMNAME}/system.qcow2,bus=virtio,cache=none --disk path=/var/lib/libvirt/images/${VMNAME}/seed.iso --network bridge:br_mgm,model=virtio --ram ${MEM}  --vcpus ${VCPU} --accelerate --boot hd --vnc --vnclisten 0.0.0.0 --noreboot --autostart --import 
+virt-install --name ${VMNAME}.${DOMAIN}.com --disk path=/var/lib/libvirt/images/${VMNAME}/system.qcow2,bus=virtio,cache=none --disk path=/var/lib/libvirt/images/${VMNAME}/seed.iso --network bridge:br_mgm,model=virtio --ram ${MEM}  --vcpus ${VCPU} --accelerate --boot hd --vnc --vnclisten 0.0.0.0 --noreboot --autostart --import 
 sleep 3
 #start this vm
-virsh start ${VMNAME}.inspurcloudtest.com
+virsh start ${VMNAME}.${DOMAIN}.com
 #virsh list
 
-virsh list|grep ${VMNAME}.inspurcloudtest.com
+virsh list|grep ${VMNAME}.${DOMAIN}.com
 
 if [ $? -eq 0 ];then
-	echo "VM:${VMNAME}.inspurcloudtest.com create successful!"
+	echo "VM:${VMNAME}.${DOMAIN}.com create successful!"
 else
-    echo "VM:${VMNAME}.inspurcloudtest.com create failure!!"
+    echo "VM:${VMNAME}.${DOMAIN}.com create failure!!"
 fi	
