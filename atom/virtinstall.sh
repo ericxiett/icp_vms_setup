@@ -68,7 +68,7 @@ fi
 
 cd ${VMNAME}
 #disk resize
-cp /home/ubuntu/centos72x86_64_cloud-init.qcow2 system.qcow2
+cp /home/ubuntu/centos73x86_64_cloud-init.qcow2 system.qcow2
 #
 if [ "${DSIZE}" -le 40 ];then
 
