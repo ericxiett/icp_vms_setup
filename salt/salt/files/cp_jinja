@@ -1,0 +1,123 @@
+#!/bin/bash
+
+set -ex
+
+{% if grains['host'] == 'cp01' %}
+#cp01 node
+echo "Welcome to setup vms on {{ grains['host'] }} node!"
+
+base_path=$(cd `dirname $0`; pwd)
+atom_path=$base_path/../atom
+
+echo "===>>> Prepare env..."
+sh $atom_path/prepare_env.sh
+
+echo "===>>> Setup vms..."
+
+{% for vms in pillar.get('cp01',{}).items() %}
+{% set vm = vms[1] %}
+echo "======vms: {{ vm['name'] }}"
+sh  $atom_path/virtinstall.sh {{ vm['name'] }} {{ vm['vcpu'] }} {{ vm['memory'] }} {{ vm['disk'] }} {{ vm['ipaddress'] }} {{ vm['netmask'] }} {{ vm['gateway'] }}
+{% endfor %}
+
+{% endif %}
+
+{% if grains['host'] == 'cp02' %}
+#cp02 node
+echo "Welcome to setup vms on {{ grains['host'] }} node!"
+
+base_path=$(cd `dirname $0`; pwd)
+atom_path=$base_path/../atom
+
+echo "===>>> Prepare env..."
+sh $atom_path/prepare_env.sh
+
+echo "===>>> Setup vms..."
+
+{% for vms in pillar.get('cp02',{}).items() %}
+{% set vm = vms[1] %}
+echo "======vms: {{ vm['name'] }}"
+sh  $atom_path/virtinstall.sh {{ vm['name'] }} {{ vm['vcpu'] }} {{ vm['memory'] }} {{ vm['disk'] }} {{ vm['ipaddress'] }} {{ vm['netmask'] }} {{ vm['gateway'] }}
+{% endfor %}
+
+{% endif %}
+
+{% if grains['host'] == 'cp03' %}
+#cp03 node
+echo "Welcome to setup vms on {{ grains['host'] }} node!"
+
+base_path=$(cd `dirname $0`; pwd)
+atom_path=$base_path/../atom
+
+echo "===>>> Prepare env..."
+sh $atom_path/prepare_env.sh
+
+echo "===>>> Setup vms..."
+
+{% for vms in pillar.get('cp03',{}).items() %}
+{% set vm = vms[1] %}
+echo "======vms:{{ vm['name'] }}"
+sh  $atom_path/virtinstall.sh {{ vm['name'] }} {{ vm['vcpu'] }} {{ vm['memory'] }} {{ vm['disk'] }} {{ vm['ipaddress'] }} {{ vm['netmask'] }} {{ vm['gateway'] }}
+{% endfor %}
+
+{% endif %}
+
+{% if grains['host'] == 'cp04' %}
+#cp04 node
+echo "Welcome to setup vms on {{ grains['host'] }} node!"
+
+base_path=$(cd `dirname $0`; pwd)
+atom_path=$base_path/../atom
+
+echo "===>>> Prepare env..."
+sh $atom_path/prepare_env.sh
+
+echo "===>>> Setup vms..."
+
+{% for vms in pillar.get('cp04',{}).items() %}
+{% set vm = vms[1] %}
+echo "======vms:{{ vm['name'] }}"
+sh  $atom_path/virtinstall.sh {{ vm['name'] }} {{ vm['vcpu'] }} {{ vm['memory'] }} {{ vm['disk'] }} {{ vm['ipaddress'] }} {{ vm['netmask'] }} {{ vm['gateway'] }}
+{% endfor %}
+
+{% endif %}
+
+{% if grains['host'] == 'cp05' %}
+#cp05 node
+echo "Welcome to setup vms on {{ grains['host'] }} node!"
+
+base_path=$(cd `dirname $0`; pwd)
+atom_path=$base_path/../atom
+
+echo "===>>> Prepare env..."
+sh $atom_path/prepare_env.sh
+
+echo "===>>> Setup vms..."
+
+{% for vms in pillar.get('cp05',{}).items() %}
+{% set vm = vms[1] %}
+echo "======vms:{{ vm['name'] }}"
+sh  $atom_path/virtinstall.sh {{ vm['name'] }} {{ vm['vcpu'] }} {{ vm['memory'] }} {{ vm['disk'] }} {{ vm['ipaddress'] }} {{ vm['netmask'] }} {{ vm['gateway'] }}
+{% endfor %}
+
+{% endif %}
+
+{% if grains['host'] == 'cp06' %}
+#cp06 node
+echo "Welcome to setup vms on {{ grains['host'] }} node!"
+
+base_path=$(cd `dirname $0`; pwd)
+atom_path=$base_path/../atom
+
+echo "===>>> Prepare env..."
+sh $atom_path/prepare_env.sh
+
+echo "===>>> Setup vms..."
+
+{% for vms in pillar.get('cp06',{}).items() %}
+{% set vm = vms[1] %}
+echo "======vms: {{ vm['name'] }}"
+sh  $atom_path/virtinstall.sh {{ vm['name'] }} {{ vm['vcpu'] }} {{ vm['memory'] }} {{ vm['disk'] }} {{ vm['ipaddress'] }} {{ vm['netmask'] }} {{ vm['gateway'] }}
+{% endfor %}
+
+{% endif %}
